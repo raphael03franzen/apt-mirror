@@ -797,7 +797,8 @@ my %stat_cache = ();
 sub _stat
 {
     my ($filename) = shift;
-    return @{ $stat_cache{$filename} } if exists $stat_cache{$filename};
+    return @{ $stat_cache{$filename} } if 
+exists $stat_cache{$filename};
     my @res = stat($filename);
     $stat_cache{$filename} = \@res;
     return @res;
@@ -888,7 +889,7 @@ sub process_index
                 add_url_to_download( $uri . "/" . $lines{"Filename:"}, $lines{"Size:"} );
             }
         }
-        else
+        elsif ( exists $lines{"Files:"})
         {    # Sources index
             foreach ( split( /\n/, $lines{"Files:"} ) )
             {
