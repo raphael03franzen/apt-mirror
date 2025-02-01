@@ -1141,17 +1141,24 @@ if ( get_variable("run_postmirror") )
 {
     my $postmirror_script = get_variable("postmirror_script");
 
-    print "Running the Post Mirror script ...\n";
-    print "($postmirror_script)\n\n";
-    if ( -x $postmirror_script )
+    unless ( -f $postmirror_script and -r $postmirror_script )
     {
-        system( $postmirror_script, '' );
+        print "\nPost Mirror script is defined but skipped because it doesn't exist or is not a readable file.\n\n";
     }
     else
     {
-        system( '/bin/sh', $postmirror_script );
+        print "Running the Post Mirror script ...\n";
+        print "($postmirror_script)\n\n";
+        if ( -x $postmirror_script )
+        {
+            system( $postmirror_script, '' );
+        }
+        else
+        {
+            system( '/bin/sh', $postmirror_script );
+        }
+        print "\nPost Mirror script has completed. See above output for any possible errors.\n\n";
     }
-    print "\nPost Mirror script has completed. See above output for any possible errors.\n\n";
 }
 
 unlock_aptmirror();
