@@ -3,9 +3,9 @@ set mirror_path       $base_path/mirror
 set skel_path         $base_path/skel
 set var_path          $base_path/var
 set postmirror_script $var_path/postmirror.sh
-set defaultarch       i386
+set defaultarch       amd64
 set run_postmirror    0
-set nthreads          20
+set nthreads          200
 set limit_rate        100m
 set _tilde            0
 # Use --unlink with wget (for use with hardlinked directories)
@@ -15,15 +15,12 @@ set http_proxy        127.0.0.1:3128
 set proxy_user        user
 set proxy_password    password
 
-deb http://archive.ubuntu.com/ubuntu precise main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu precise-security main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu precise-backports main restricted universe multiverse
+deb https://deb.debian.org/debian/ bookworm main contrib non-free-firmware non-free
+deb-i386 https://deb.debian.org/debian/ bookworm main contrib non-free-firmware non-free
+deb-amd64 https://deb.debian.org/debian/ bookworm main contrib non-free-firmware non-free
 
-#deb-src http://archive.ubuntu.com/ubuntu precise main restricted universe multiverse
-#deb-src http://archive.ubuntu.com/ubuntu precise-security main restricted universe multiverse
-#deb-src http://archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse
-#deb-src http://archive.ubuntu.com/ubuntu precise-backports main restricted universe multiverse
+deb https://deb.debian.org/debian-security bookworm-security main contrib non-free-firmware non-free
+deb-i386 https://deb.debian.org/debian-security bookworm-security main contrib non-free-firmware non-free
+deb-amd64 https://deb.debian.org/debian-security bookworm-security main contrib non-free-firmware non-free
 
-clean http://archive.ubuntu.com/ubuntu
-
+clean https://deb.debian.org/
